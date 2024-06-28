@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <form id="guessForm">
+        <input type="number" id="guessInput" min="1" max="100" required>
+        <button type="submit">Submit Guess</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+        // Generate a random number between 1 and 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+        // Function to handle form submission
+        document.getElementById('guessForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get user's guess
+            const guess = parseInt(document.getElementById('guessInput').value);
+
+            // Check if the guess is correct, too high, or too low
+            if (guess === randomNumber) {
+                showMessage('Congratulations! You guessed the correct number.');
+            } else if (guess < randomNumber) {
+                showMessage('Too low. Try again!');
+            } else {
+                showMessage('Too high. Try again!');
+            }
+
+            // Clear input field after each guess
+            document.getElementById('guessInput').value = '';
+        });
+
+        // Function to display messages
+        function showMessage(message) {
+            document.getElementById('message').textContent = message;
+        }
+    </script>
+</body>
+</html>
